@@ -50,3 +50,33 @@ class WordGuessingGame:
             self.incorrect_guesses += 1
             print(f"Sorry, '{letter}' is not in the word.")
         return True
+
+    def check_win(self):
+        return "_" not in self.current_display
+
+    def check_loss(self):
+        return self.incorrect_guesses >= self.max_guesses
+
+    def play_game(self):
+        print("Welcome to the Word Guessing Game!")
+        print(f"The word has {len(self.random_word)} letters.")
+        # While game is not won or loss, user makes guesses
+        while not self.check_win() and not self.check_loss():
+            self.display_game_state()
+            # Strip whitespace and lower case of the letter in user input
+            guess = input("Guess one letter at a time: ").strip().lower()
+            self.make_guess(guess)
+
+        self.display_game_state()
+        # Call display game state for check win - current display, to see if user has won
+        if self.check_win():
+            # Print congratulatory message if the word is guessed
+            print(f"Congratulations!\nYou guessed the word: {self.random_word}")
+        else:
+            # Print game over and display the correct word
+            print(f"Game over! Ran out of guesses.\nThe word was: {self.random_word}")
+
+if __name__ == "__main__":
+    words = ["python", "programming", "github", "pytest", "challenge", "commit"]
+    game = WordGuessingGame(words)
+    game.play_game()
