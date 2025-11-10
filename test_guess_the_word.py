@@ -36,3 +36,18 @@ def test_guess_incorrect_letter(word_guessing_game_instance):
     assert result == True
     assert letter in word_guessing_game_instance.guessed_letters
     assert word_guessing_game_instance.incorrect_guesses == initial_attempts + 1
+
+def test_guess_already_guessed(word_guessing_game_instance):
+    word_guessing_game_instance.random_word = "python"
+    letter = "p"
+    word_guessing_game_instance.make_guess(letter)
+    # Guess the same letter again
+    result = word_guessing_game_instance.make_guess(letter)
+    # Displays message saying "You already guessed that letter. Try again."
+    assert result == False
+
+def test_invalid_guess_input(word_guessing_game_instance):
+    letter = "1"
+    result = word_guessing_game_instance.make_guess(letter)
+    # Displays message "Invalid input. Please enter a single letter."
+    assert result == False
