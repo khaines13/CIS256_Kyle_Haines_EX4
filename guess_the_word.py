@@ -6,7 +6,10 @@
 import random
 
 class WordGuessingGame:
+    """A class to represent a word guessing game where the user guesses a word letter by letter."""
     def __init__(self, word_list, max_guesses=6):
+        """Initializes the WordGuessingGame, with list of words to choose from and max guesses"""
+
         self.word_list = word_list
         self.random_word = self.choose_word()
         self.guessed_letters = []
@@ -15,12 +18,15 @@ class WordGuessingGame:
         self.current_display = self.initialize_display()
 
     def choose_word(self):
+        """Selects a random word from the word_list."""
         return random.choice(self.word_list).lower()
 
     def initialize_display(self):
+        """Creates the initial display string (blank spaces for word, ex: "_____")."""
         return ["_" for _ in self.random_word]
 
     def display_game_state(self):
+        """Prints the current state of the game, including the displayed word and remaining guesses."""
         print("\nWord: " + " ".join(self.current_display))
         # Display number of incorrect guesses and max allowed guesses
         print(f"Incorrect guesses: {self.incorrect_guesses}/{self.max_guesses}")
@@ -28,6 +34,7 @@ class WordGuessingGame:
         print(f"Guessed letters: {', '.join(sorted(self.guessed_letters))}")
 
     def make_guess(self, letter):
+        """Processes the user's letter guess."""
 
         # Ensure user only enters one letter per guess
         if not letter.isalpha() or len(letter) != 1:
@@ -52,12 +59,15 @@ class WordGuessingGame:
         return True
 
     def check_win(self):
+        """Checks if the user has won the game."""
         return "_" not in self.current_display
 
     def check_loss(self):
+        """Checks if the user has lost the game."""
         return self.incorrect_guesses >= self.max_guesses
 
     def play_game(self):
+        """Manages the main game loop"""
         print("Welcome to the Word Guessing Game!")
         print(f"The word has {len(self.random_word)} letters.")
         # While game is not won or loss, user makes guesses
