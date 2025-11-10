@@ -87,7 +87,9 @@ class WordGuessingGame:
             # Print game over and display the correct word
             print(f"Game over! Ran out of guesses.\nThe word was: {self.random_word}")
 
+# Example Usage:
 if __name__ == "__main__":
+    # Initialize WordGuessingGame with list of words
     words = ["python", "programming", "github", "pytest", "challenge", "commit"]
     game = WordGuessingGame(words)
     game.play_game()
