@@ -26,6 +26,18 @@ def test_guess_correct_letter(word_guessing_game_instance):
     # Displays message for correct guess "Good guess! 'p' is in the word."
     assert result == True
     assert letter in word_guessing_game_instance.guessed_letters
+    letter = " Y "
+    result = word_guessing_game_instance.make_guess(letter)
+    # Does not display error as it strips whitespace and lowers the case of user input to be valid
+    assert result == True
+    letter = " T"
+    result = word_guessing_game_instance.make_guess(letter)
+    # Valid user input with whitespace before single uppercase letter
+    assert result == True
+    letter = "H "
+    result = word_guessing_game_instance.make_guess(letter)
+    # Valid user input with whitespace after single uppercase letter
+    assert result == True
 
 def test_guess_incorrect_letter(word_guessing_game_instance):
     initial_attempts = word_guessing_game_instance.incorrect_guesses
@@ -50,4 +62,12 @@ def test_invalid_guess_input(word_guessing_game_instance):
     letter = "1"
     result = word_guessing_game_instance.make_guess(letter)
     # Displays message "Invalid input. Please enter a single letter."
+    assert result == False
+    letter = "aa"
+    result = word_guessing_game_instance.make_guess(letter)
+    # Displays error message for multiple letters
+    assert result == False
+    letter = ""
+    result = word_guessing_game_instance.make_guess(letter)
+    # Displays error message for no input
     assert result == False
