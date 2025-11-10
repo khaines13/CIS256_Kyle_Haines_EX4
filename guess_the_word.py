@@ -35,6 +35,7 @@ class WordGuessingGame:
 
     def make_guess(self, letter):
         """Processes the user's letter guess."""
+        letter = letter.strip().lower()
 
         # Ensure user only enters one letter per guess
         if not letter.isalpha() or len(letter) != 1:
